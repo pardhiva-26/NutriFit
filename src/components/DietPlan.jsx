@@ -1,8 +1,18 @@
 import React from 'react';
+import ColorBar from './ColorBar';
 import { Card, Button, Alert } from 'react-bootstrap';
 
 const DietPlan = ({ record, onDelete }) => {
   const { id, bmi, height, weight } = record;
+
+  const inputDisplay = () =>{
+    return (
+       <>
+        {`Given HEIGHT:${height}cm WEIGHT:${weight}kg` }
+       </>
+    )
+    
+  }
 
   const getDietPlan = () => {
     if (bmi < 18.5) {
@@ -102,7 +112,9 @@ const DietPlan = ({ record, onDelete }) => {
       <Card.Body>
         <Button variant="danger" className="float-end" onClick={() => onDelete(id)}>Delete</Button>
         <Card.Title>Your BMI: {bmi}</Card.Title>
-        <Card.Text>{getDietPlan()}</Card.Text>
+        <ColorBar bmi={bmi} />
+        {inputDisplay()}
+        <Card.Text >{getDietPlan()}</Card.Text>
         {getWarning()}
       </Card.Body>
     </Card>
